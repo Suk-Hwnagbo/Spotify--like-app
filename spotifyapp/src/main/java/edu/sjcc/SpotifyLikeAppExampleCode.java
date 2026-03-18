@@ -11,6 +11,7 @@ public class SpotifyLikeAppExampleCode {
 
   // the current audio clip
   private static Clip audioClip;
+  private static Song currentSong;
 
   /*
    *** IMPORTANT NOTE FOR ALL STUDENTS ***
@@ -67,7 +68,7 @@ public class SpotifyLikeAppExampleCode {
       userInput = userInput.toLowerCase();
 
       // do something
-      handleMenu(userInput, library);
+      handleMenu(userInput, library, input);
     }
 
     // close the scanner
@@ -85,27 +86,72 @@ public class SpotifyLikeAppExampleCode {
     System.out.println("[P]lay");
     System.out.println("[Q]uit");
 
-    System.out.println("");
+    System.out.println("[T} top playing");
     System.out.print("Enter q to Quit:");
   }
 
   /*
    * handles the user input for the app
    */
-  public static void handleMenu(String userInput, Song[] library) {
+  public static void handleMenu(String userInput, Song[] library, Scanner input) {
     switch (userInput) {
       case "h":
         System.out.println("-->Home<--");
         break;
       case "s":
         System.out.println("-->Search by title<--");
+
+        String query = input.nextLine();
+        boolean found = false;
+        System.out.println("search information" + query);
+
+        for (int i = 0; i < library.length; i++) {
+          if (library[i].name().toLowerCase().contains(query.toLowerCase())) {
+            System.out.println(library[i].name());
+            System.out.println("Enter t to stop playing");
+
+            currentSong = library[i];
+            play(currentSong);
+            found = true;
+            break;
+          }
+        }
+
+        if (!found) {
+          System.out.println("Song not found.");
+        }
         break;
+
       case "l":
         System.out.println("-->Library<--");
+        for (int i = 0; i < library.length; i++) {
+          System.out.println((i + 1) + "," + library[i].toString());
+
+        }
+
         break;
       case "p":
-        System.out.println("-->Play<--");
-        play(library);
+        System.out.println("Enter the number of the song you would like to play");
+        try {
+          int songNum = Integer.parseInt(input.nextLine());
+          if (songNum > 0 && songNum <= library.length) {
+            currentSong = library[songNum - 1];
+            play(currentSong);
+          }
+
+          else {
+            System.out.println("Invalid number.");
+          }
+        } catch (Exception e) {
+          System.out.println("please enter a valid number.");
+        }
+        break;
+
+      case "t":
+        System.out.println("-->Stop playing<--");
+        if (audioClip != null && audioClip.isActive()) {
+          audioClip.stop();
+        }
         break;
       case "q":
         System.out.println("-->Quit<--");
@@ -118,12 +164,12 @@ public class SpotifyLikeAppExampleCode {
   /*
    * plays an audio file
    */
-  public static void play(Song[] library) {
+  public static void play(Song song) {
     // open the audio file
 
     // get the filePath and open a audio file
-    final Integer i = 3;
-    final String filename = library[i].fileName();
+
+    final String filename = song.fileName();
     final String filePath = directoryPath + "/wav/" + filename;
     final File file = new File(filePath);
 
