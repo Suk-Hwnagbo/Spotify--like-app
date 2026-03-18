@@ -68,6 +68,7 @@ public class SpotifyLikeAppExampleCode {
       userInput = userInput.toLowerCase();
 
       // do something
+      // handlemenu is some fucntion that deals with paraemeter
       handleMenu(userInput, library, input);
     }
 
@@ -96,20 +97,26 @@ public class SpotifyLikeAppExampleCode {
   public static void handleMenu(String userInput, Song[] library, Scanner input) {
     switch (userInput) {
       case "h":
+        // it prints out home and it goes to difrrent menu
         System.out.println("-->Home<--");
         break;
       case "s":
         System.out.println("-->Search by title<--");
-
+        // user enters s, it's gonna search. query is what the user is searching for
         String query = input.nextLine();
+        // initilizae it and default statment is false. we need it because it's varaible
+        // that we need for another if.
         boolean found = false;
         System.out.println("search information" + query);
 
         for (int i = 0; i < library.length; i++) {
+          // library at i
+          // if querry matches the part of the name, then it's a match
           if (library[i].name().toLowerCase().contains(query.toLowerCase())) {
             System.out.println(library[i].name());
             System.out.println("Enter t to stop playing");
 
+            // found is for prevenint if(!found) from happening
             currentSong = library[i];
             play(currentSong);
             found = true;
@@ -121,7 +128,8 @@ public class SpotifyLikeAppExampleCode {
           System.out.println("Song not found.");
         }
         break;
-
+      // library[i] is an object that im forcing by using toString to transform it to
+      // stinrg.
       case "l":
         System.out.println("-->Library<--");
         for (int i = 0; i < library.length; i++) {
@@ -133,7 +141,10 @@ public class SpotifyLikeAppExampleCode {
       case "p":
         System.out.println("Enter the number of the song you would like to play");
         try {
+          // parseInt is searching for the integer
           int songNum = Integer.parseInt(input.nextLine());
+          // the songs in the library start with 1 but index starts with zero that's the
+          // reason why we put -1
           if (songNum > 0 && songNum <= library.length) {
             currentSong = library[songNum - 1];
             play(currentSong);
