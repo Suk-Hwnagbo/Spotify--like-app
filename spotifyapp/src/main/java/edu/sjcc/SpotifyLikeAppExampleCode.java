@@ -46,7 +46,7 @@ public class SpotifyLikeAppExampleCode {
    * 
    */
 
-  private static String directoryPath = "C:/Users/jerom/Documents/GitHub/class-java/spotify-like-app2/demo/src/main/java/com/example/";
+  private static String directoryPath = "C:/Users/sean0/OneDrive/Documents/GitHub/Spotify- like-app/spotifyapp/src/main/java/edu/sjcc";
 
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
@@ -161,6 +161,7 @@ public class SpotifyLikeAppExampleCode {
     } catch (Exception e) {
       System.out.printf("ERROR: unable to read the file %s\n", filePath);
       System.out.println();
+      e.printStackTrace();
     }
 
     return library;
