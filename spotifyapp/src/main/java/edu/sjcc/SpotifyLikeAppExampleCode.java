@@ -52,19 +52,24 @@ public class SpotifyLikeAppExampleCode {
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
     // reading audio library from json file
+    // First, the program reads the song library.
     Song[] library = readAudioLibrary();
 
     // create a scanner for user input
+    // tool that you can put in
     Scanner input = new Scanner(System.in);
 
     String userInput = "";
     while (!userInput.equals("q")) {
+      // show it on the screen
       menu();
 
       // get input
+      // allow me totype h-home, s->search, l->library, p->play, q->quit
       userInput = input.nextLine();
 
       // accept upper or lower case commands
+
       userInput = userInput.toLowerCase();
 
       // do something
@@ -78,6 +83,8 @@ public class SpotifyLikeAppExampleCode {
 
   /*
    * displays the menu for the app
+   * 
+   * it is command that prints text to the console
    */
   public static void menu() {
     System.out.println("---- SpotifyLikeApp ----");
