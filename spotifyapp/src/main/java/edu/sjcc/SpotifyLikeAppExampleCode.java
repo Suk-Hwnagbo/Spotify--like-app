@@ -108,6 +108,8 @@ public class SpotifyLikeAppExampleCode {
         System.out.println("-->Search by title<--");
         // user enters s, it's gonna search. query is what the user is searching for
 
+        input.nextLine();
+        System.out.print("Search:");
         searchBytitle(library, input);
         break;
       }
@@ -121,22 +123,7 @@ public class SpotifyLikeAppExampleCode {
 
       case "p":
         System.out.println("Enter the number of the song you would like to play");
-        try {
-          // parseInt is searching for the integer
-          int songNum = Integer.parseInt(input.nextLine());
-          // the songs in the library start with 1 but index starts with zero that's the
-          // reason why we put -1
-          if (songNum > 0 && songNum <= library.length) {
-            currentSong = library[songNum - 1];
-            play(currentSong);
-          }
-
-          else {
-            System.out.println("Invalid number.");
-          }
-        } catch (Exception e) {
-          System.out.println("please enter a valid number.");
-        }
+        playSongByNumber(library, input);
         break;
 
       case "t":
@@ -154,18 +141,21 @@ public class SpotifyLikeAppExampleCode {
   }
 
   public static void searchBytitle(Song[] library, Scanner input) {
-    String query = input.nextLine();
+    String query = input.nextLine().trim().toLowerCase();
     // initilizae it and default statment is false. we need it because it's varaible
     // that we need for another if.
+    if (query.isEmpty()) {
+      query = input.nextLine().trim().toLowerCase();
+    }
     boolean found = false;
-    System.out.println("search information" + query);
 
     for (int i = 0; i < library.length; i++) {
       // library at i
       // if querry matches the part of the name, then it's a match
-      if (library[i].name().toLowerCase().contains(query.toLowerCase())) {
-        System.out.println(library[i].name());
-        System.out.println("Enter t to stop playing");
+      if (library[i].name().toLowerCase().contains(query.toLowerCase().trim()) ||
+          library[i].artist().toLowerCase().contains(query.toLowerCase().trim())) {
+
+        System.out.println("Found:" + library[i].toString());
 
         // found is for prevenint if(!found) from happening
         currentSong = library[i];
@@ -185,8 +175,26 @@ public class SpotifyLikeAppExampleCode {
     }
   }
 
+  public static void playSongByNumber(Song[] library, Scanner input) {
+    try {
+      int songNum = Integer.parseInt(input.nextLine());
+      // the songs in the library start with 1 but index starts with zero that's the
+      // reason why we put -1
+      if (songNum > 0 && songNum <= library.length) {
+        currentSong = library[songNum - 1];
+        play(currentSong);
+      } else {
+        System.out.println("invalid number");
+      }
+    } catch (Exception e) {
+      System.out.println("please enter a valid number");
+    }
+  }
+
   /*
    * plays an audio file
+   * 
+   * 
    */
   public static void play(Song song) {
     // open the audio file

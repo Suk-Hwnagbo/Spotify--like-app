@@ -11,10 +11,9 @@ public class Song {
 
   // serializes attributes into a string
   public String toString() {
-    String s;
 
     // since the object is complex, we return a JSON formatted string
-    s = "{ ";
+    String s = "{ ";
     s += "name: " + name;
     s += ", ";
     s += "artist: " + artist;
