@@ -66,14 +66,10 @@ public class SpotifyLikeAppExampleCode {
 
       // get input
       // allow me totype h-home, s->search, l->library, p->play, q->quit
-      userInput = input.nextLine();
+      userInput = input.nextLine().toLowerCase();
 
       // accept upper or lower case commands
 
-      userInput = userInput.toLowerCase();
-
-      // do something
-      // handlemenu is some fucntion that deals with paraemeter
       handleMenu(userInput, library, input);
     }
 
@@ -107,44 +103,22 @@ public class SpotifyLikeAppExampleCode {
         // it prints out home and it goes to difrrent menu
         System.out.println("-->Home<--");
         break;
-      case "s":
+
+      case "s": {
         System.out.println("-->Search by title<--");
         // user enters s, it's gonna search. query is what the user is searching for
-        String query = input.nextLine();
-        // initilizae it and default statment is false. we need it because it's varaible
-        // that we need for another if.
-        boolean found = false;
-        System.out.println("search information" + query);
 
-        for (int i = 0; i < library.length; i++) {
-          // library at i
-          // if querry matches the part of the name, then it's a match
-          if (library[i].name().toLowerCase().contains(query.toLowerCase())) {
-            System.out.println(library[i].name());
-            System.out.println("Enter t to stop playing");
-
-            // found is for prevenint if(!found) from happening
-            currentSong = library[i];
-            play(currentSong);
-            found = true;
-            break;
-          }
-        }
-
-        if (!found) {
-          System.out.println("Song not found.");
-        }
+        searchBytitle(library, input);
         break;
+      }
+
       // library[i] is an object that im forcing by using toString to transform it to
-      // stinrg.
+      // string
       case "l":
         System.out.println("-->Library<--");
-        for (int i = 0; i < library.length; i++) {
-          System.out.println((i + 1) + "," + library[i].toString());
-
-        }
-
+        displayLibrary(library);
         break;
+
       case "p":
         System.out.println("Enter the number of the song you would like to play");
         try {
@@ -176,6 +150,38 @@ public class SpotifyLikeAppExampleCode {
         break;
       default:
         break;
+    }
+  }
+
+  public static void searchBytitle(Song[] library, Scanner input) {
+    String query = input.nextLine();
+    // initilizae it and default statment is false. we need it because it's varaible
+    // that we need for another if.
+    boolean found = false;
+    System.out.println("search information" + query);
+
+    for (int i = 0; i < library.length; i++) {
+      // library at i
+      // if querry matches the part of the name, then it's a match
+      if (library[i].name().toLowerCase().contains(query.toLowerCase())) {
+        System.out.println(library[i].name());
+        System.out.println("Enter t to stop playing");
+
+        // found is for prevenint if(!found) from happening
+        currentSong = library[i];
+        play(currentSong);
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      System.out.println("Song not found.");
+    }
+  }
+
+  public static void displayLibrary(Song[] library) {
+    for (int i = 0; i < library.length; i++) {
+      System.out.println((i + 1) + "," + library[i].toString());
     }
   }
 
