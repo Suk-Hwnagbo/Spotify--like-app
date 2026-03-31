@@ -8,6 +8,10 @@ public class Song {
   private String fileName;
   private String year;
   private String genre;
+  private boolean isFavorite;
+  private String comments;
+
+  // 보너스 필드 추가
 
   // serializes attributes into a string
   public String toString() {
@@ -23,7 +27,10 @@ public class Song {
     s += "year:" + year;
     s += ",";
     s += "genre:" + genre;
-    s += " }";
+
+    s += ",isFavorite " + isFavorite;
+    s += ",comments " + (comments == null ? "None" : comments);
+    s += "}";
 
     return s;
   }
@@ -48,4 +55,9 @@ public class Song {
   public String genre() {
     return this.genre;
   }
+
+  public void setComments(String text) {
+    this.comments = text;
+  }
+
 }

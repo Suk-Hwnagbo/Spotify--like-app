@@ -4,35 +4,41 @@
     "artist": "Cali Swag District",
     "fileName": "dougie-crop.wav",
     "year": "2010",
-    "genre": "hiphop"
-    
+    "genre": "hiphop",
+    "isFavorite": false,
+    "comments": ""
   },
   {
-    "name": "Could've Been (Tik Tok Remix)",
+    "name": "Could\u0027ve Been (Tik Tok Remix)",
     "artist": "H.E.R.",
     "fileName": "her-crop.wav",
-    "year":"1987",
-    "genre":"R&d ballad"
+    "year": "1987",
+    "genre": "R\u0026d ballad",
+    "isFavorite": false,
+    "comments": ""
   },
   {
     "name": "On Me",
     "artist": "Lil Baby",
     "fileName": "lil-baby-crop.wav",
-    "year":"2018",
-    "genre": "hiphop"
+    "year": "2018",
+    "genre": "hiphop",
+    "isFavorite": false,
+    "comments": ""
   },
   {
     "name": "Mo Money Mo Problems",
     "artist": "Notorios BIG",
-	  "fileName": "biggie-crop.wav",
-    "year":"1997",
-    "genre ":"pop rap"
+    "fileName": "biggie-crop.wav",
+    "year": "1997",
+    "isFavorite": false
   },
   {
     "name": "Industry Baby",
     "artist": "Lil Nas X",
     "fileName": "lil-nas-x-crop.wav",
-    "year":"2021",
-    "genre": "trap music"
+    "year": "2021",
+    "genre": "trap music",
+    "isFavorite": false
   }
 ]

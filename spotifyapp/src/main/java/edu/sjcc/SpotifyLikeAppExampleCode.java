@@ -126,6 +126,11 @@ public class SpotifyLikeAppExampleCode {
         playSongByNumber(library, input);
         break;
 
+      case "c":
+        System.out.println("Add a comment");
+        addComment(library, input);
+        break;
+
       case "t":
         System.out.println("-->Stop playing<--");
         if (audioClip != null && audioClip.isActive()) {
@@ -241,7 +246,39 @@ public class SpotifyLikeAppExampleCode {
       System.out.println();
       e.printStackTrace();
     }
-
     return library;
+  }
+
+  public static void saveAudioLibrary(Song[] library) {
+    final String jsonFileName = "audio-library.json";
+    final String filePath = directoryPath + "/" + jsonFileName;
+
+    try (Writer writer = new FileWriter(filePath)) {
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      gson.toJson(library, writer);
+      System.out.println(" sucessfly save it");
+
+    } catch (IOException e) {
+      System.out.println("file cannot save it");
+      e.printStackTrace();
+    }
+
+  }
+
+  public static void addComment(Song[] library, Scanner input) {
+    if (currentSong != null) {
+      input.nextLine();
+      System.out.println("Enter your comment");
+
+      String text = input.nextLine();
+      // ordering currentsong to set text
+      currentSong.setComments(text);
+
+      saveAudioLibrary(library);
+
+    } else {
+      System.out.println("please play a song first");
+    }
+
   }
 }
