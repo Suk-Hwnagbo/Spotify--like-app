@@ -267,7 +267,7 @@ public class SpotifyLikeAppExampleCode {
 
   public static void addComment(Song[] library, Scanner input) {
     if (currentSong != null) {
-      input.nextLine();
+
       System.out.println("Enter your comment");
 
       String text = input.nextLine();
